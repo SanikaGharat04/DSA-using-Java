@@ -1,0 +1,97 @@
+class Stack {
+    
+    private int top; 
+    private int maxSize; 
+    private int[] arr;
+
+    Stack(int maxSize) {
+        this.top = -1; 
+        this.maxSize = maxSize;
+        arr = new int[maxSize];
+    }
+
+    public boolean isFull() {
+        return top >= (maxSize - 1);
+    }
+
+    public boolean push(int data) {
+        if (isFull()) {
+            return false;
+        } else {
+            arr[++top] = data;
+            return true;
+        }
+    }
+
+    public int peek() {
+        if (isEmpty())
+            return Integer.MIN_VALUE;
+        else
+            return arr[top];
+    }
+
+    public void display() {
+        if (isEmpty())
+            System.out.println("Stack is empty!");
+        else {
+            System.out.println("Displaying stack elements:");
+            for (int index = top; index >= 0; index--) {
+                System.out.println(arr[index]);
+            }
+        }
+    }
+
+    public boolean isEmpty() {
+        return top < 0;
+    }
+
+    public int pop() {
+        if (isEmpty())
+            return Integer.MIN_VALUE;
+        else
+            return arr[top--];
+    }
+
+    public int getMaxSize() {
+        return maxSize;
+    }
+}
+public class StackAssignment{
+
+    public static void main(String args[]) {
+            
+        Stack stack = new Stack(10);
+        stack.push(15);
+        stack.push(20);
+        stack.push(30);
+        stack.push(40);
+        
+        calculateSum(stack);
+            
+        System.out.println("Updated stack:");
+        stack.display();
+    }
+
+    public static void calculateSum(Stack stack) {
+        int maxSize = stack.getMaxSize(); // Access maxSize using getter method
+        Stack tempStack = new Stack(maxSize); // Temporary stack to reorganize elements
+
+        // Step 1: Calculate the sum of all elements in the original stack
+        int sum = 0;
+        
+        while (!stack.isEmpty()) {
+            int element = stack.pop();
+            sum += element;
+            tempStack.push(element); // Push elements into tempStack
+        }
+        
+        // Step 2: Push the sum to the bottom of the stack
+        stack.push(sum);
+        
+        // Step 3: Restore original stack order with sum at the bottom
+        while (!tempStack.isEmpty()) {
+            int element = tempStack.pop();
+            stack.push(element); // Push elements back to original stack
+        }
+    }
+}
