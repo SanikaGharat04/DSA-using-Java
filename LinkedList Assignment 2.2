@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+class Tester {
+
+    public static List<Integer> findCommonElements(List<Integer> listOne, List<Integer> listTwo) {
+        // Create a List to store common elements
+        List<Integer> commonElements = new ArrayList<>();
+
+        // Create a temporary ArrayList to hold elements of listOne for quick lookup
+        List<Integer> tempList = new ArrayList<>(listOne);
+
+        // Iterate through listTwo to find common elements
+        for (Integer element : listTwo) {
+            if (tempList.contains(element)) {
+                commonElements.add(element);
+                // Remove the element from tempList to avoid duplicates in commonElements
+                tempList.remove(element);
+            }
+        }
+
+        return commonElements;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> listOne = new LinkedList<>();
+        listOne.add(10);
+        listOne.add(12);
+        listOne.add(21);
+        listOne.add(1);
+        listOne.add(53);
+
+        List<Integer> listTwo = new LinkedList<>();
+        listTwo.add(11);
+        listTwo.add(21);
+        listTwo.add(25);
+        listTwo.add(53);
+        listTwo.add(47);
+
+        List<Integer> commonElements = findCommonElements(listOne, listTwo);
+
+        System.out.println("Common Elements:");
+        for (Integer element : commonElements) {
+            System.out.println(element);
+        }
+    }
+}
