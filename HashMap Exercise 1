@@ -1,0 +1,69 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+class Student {
+
+    public static Map<String, Double> findMaxMinScorers(Map<String, Double> studentMarks) {
+        Map<String, Double> result = new HashMap<>();
+
+        if (studentMarks == null || studentMarks.isEmpty()) {
+            return result;
+        }
+
+        // Initialize variables to hold max and min scores
+        double maxScore = Double.MIN_VALUE;
+        double minScore = Double.MAX_VALUE;
+        String maxScorer = null;
+        String minScorer = null;
+
+        // Iterate through the studentMarks map to find max and min scores
+        for (Entry<String, Double> entry : studentMarks.entrySet()) {
+            String studentName = entry.getKey();
+            double score = entry.getValue();
+
+            // Check for maximum score
+            if (score > maxScore) {
+                maxScore = score;
+                maxScorer = studentName;
+            }
+
+            // Check for minimum score
+            if (score < minScore) {
+                minScore = score;
+                minScorer = studentName;
+            }
+        }
+
+        // Add max and min scorers to the result map
+        if (maxScorer != null) {
+            result.put("Top Scorer: " + maxScorer, maxScore);
+        }
+        if (minScorer != null) {
+            result.put("Low Scorer: " + minScorer, minScore);
+        }
+
+        return result;
+    }
+
+}
+
+class Tester {
+
+    public static void main(String args[]) {
+        Map<String, Double> studentMarks = new HashMap<>();
+        studentMarks.put("Lily", 90.0);
+        studentMarks.put("Robin", 68.0);
+        studentMarks.put("Marshall", 76.5);
+        studentMarks.put("Neil", 67.0);
+        studentMarks.put("Ted", 92.0);
+
+        Map<String, Double> maxMinScorers = Student.findMaxMinScorers(studentMarks);
+
+        System.out.println("Details of Top Scorers & Low Scorers\n====================================");
+        for (Entry<String, Double> entry : maxMinScorers.entrySet()) {
+            System.out.println(entry.getKey() + " -- " + entry.getValue());
+        }
+
+    }
+}
