@@ -1,0 +1,18 @@
+class Tester {
+	 
+	public static int calculatePower(int num, int p) {
+        int result = 1;
+        
+        for (int i = 0; i < p; i++) {
+            result *= num;
+        }
+        
+        return result;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(calculatePower(2, 3)); // Example: 2^3 = 8
+		System.out.println(calculatePower(3, 4)); // Example: 3^4 = 81
+		System.out.println(calculatePower(5, 0)); // Example: 5^0 = 1
+	}
+}
