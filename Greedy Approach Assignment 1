@@ -1,0 +1,28 @@
+class Tester {
+    
+    public static int findSwapCount(String inputString) {
+        int balance = 0;  // To keep track of current balance of '(' and ')'
+        int swapCount = 0;  // To count the number of swaps needed
+        
+        for (char c : inputString.toCharArray()) {
+            if (c == '(') {
+                balance++;
+            } else if (c == ')') {
+                balance--;
+            }
+            
+            // If balance becomes negative, we need to swap
+            if (balance < 0) {
+                swapCount++;
+                balance = 0;  // Reset balance as we have corrected it with a swap
+            }
+        }
+        
+        return swapCount;
+    }
+  
+    public static void main(String args[]) {
+        String inputString = "())()(";
+        System.out.println("Number of swaps: " + findSwapCount(inputString));  // Output: 2
+    } 
+}
