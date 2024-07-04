@@ -1,0 +1,60 @@
+import java.util.Arrays;
+
+class Tester {
+
+    public static void sortArray(int arr[]) {
+        Arrays.sort(arr);
+    }
+
+    public static int findMaxSum(int arr[], int m) {
+        int maxSum = 0;
+        int currentSum = 0;
+
+        // Calculate sum of first window of size m
+        for (int i = 0; i < m; i++) {
+            currentSum += arr[i];
+        }
+        maxSum = currentSum;
+
+        // Slide the window across the array to calculate max sum
+        for (int i = m; i < arr.length; i++) {
+            currentSum = currentSum + arr[i] - arr[i - m];
+            maxSum = Math.max(maxSum, currentSum);
+        }
+
+        return maxSum;
+    }
+
+    public static int findMinSum(int arr[], int m) {
+        int minSum = 0;
+        int currentSum = 0;
+
+        // Calculate sum of first window of size m
+        for (int i = 0; i < m; i++) {
+            currentSum += arr[i];
+        }
+        minSum = currentSum;
+
+        // Slide the window across the array to calculate min sum
+        for (int i = m; i < arr.length; i++) {
+            currentSum = currentSum + arr[i] - arr[i - m];
+            minSum = Math.min(minSum, currentSum);
+        }
+
+        return minSum;
+    }
+
+    public static void main(String[] args) {
+        int arr[] = { 64, 34, 25, 12, 22, 11, 90 };
+
+        sortArray(arr);
+        System.out.println("Sorted Array: " + Arrays.toString(arr));
+
+        int m1 = 4;
+        int m2 = 3;
+
+        System.out.println("Maximum Sum for m=" + m1 + ": " + findMaxSum(arr, m1));
+        System.out.println("Minimum Sum for m=" + m2 + ": " + findMinSum(arr, m2));
+    }
+
+}
