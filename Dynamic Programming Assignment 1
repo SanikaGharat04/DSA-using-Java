@@ -1,0 +1,31 @@
+import java.util.List;
+
+class Tester {
+    
+    static int count = 0;
+    
+    public static void findWordSegments(List<String> wordsList, String inputString) {
+        int n = inputString.length();
+        int[] dp = new int[n + 1];
+        dp[0] = 1; // There is one way to segment an empty string
+        
+        for (int i = 1; i <= n; i++) {
+            for (String word : wordsList) {
+                int len = word.length();
+                if (i >= len && inputString.substring(i - len, i).equals(word)) {
+                    dp[i] += dp[i - len];
+                }
+            }
+        }
+        
+        count = dp[n];
+    }
+
+    public static void main(String[] args) {
+        List<String> wordsList = List.of("i", "like", "pizza", "li", "ke", "pi", "zza");
+        String inputString = "ilikepizza";
+        
+        findWordSegments(wordsList, inputString);
+        System.out.println("Number of segments: " + count); // Output: Number of segments: 4
+    }
+}
